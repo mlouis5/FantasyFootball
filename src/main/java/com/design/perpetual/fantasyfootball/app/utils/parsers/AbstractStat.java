@@ -5,18 +5,28 @@
  */
 package com.design.perpetual.fantasyfootball.app.utils.parsers;
 
-import com.design.perpetual.fantasyfootball.app.utils.parsers.pojo.Passing;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Objects;
 
 /**
  *
  * @author MacDerson
+ * @param <T>
  */
-public abstract class AbstractStat<T> implements Aggregatable<T> {
+public abstract class AbstractStat<T extends AbstractStat> implements Aggregatable<T> {
+
+    private String pid;
     private String name;
     @JsonIgnore
     private String team;
+
+    public String getPid() {
+        return pid;
+    }
+
+    public void setPid(String pid) {
+        this.pid = pid;
+    }
 
     public String getName() {
         return name;
@@ -32,13 +42,12 @@ public abstract class AbstractStat<T> implements Aggregatable<T> {
 
     public void setTeam(String team) {
         this.team = team;
-    }
+    }    
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.name);
-        hash = 97 * hash + Objects.hashCode(this.team);
+        int hash = 3;
+        hash = 79 * hash + Objects.hashCode(this.pid);
         return hash;
     }
 
@@ -47,13 +56,16 @@ public abstract class AbstractStat<T> implements Aggregatable<T> {
         if (obj == null) {
             return false;
         }
+        System.out.println("getClass(): " + getClass());
+        System.out.println("obj.getClass(): " + obj.getClass());
         if (getClass() != obj.getClass()) {
+            System.out.println("returning false, objects not same");
             return false;
         }
-        final AbstractStat other = (AbstractStat) obj;
-        return Objects.equals(name, other.name) 
-                && Objects.equals(team, other.team);
+        final AbstractStat<T> other = (AbstractStat<T>) obj;
+        return Objects.equals(pid, other.pid);
     }
-        
+
+    @Override
     public abstract void aggregate(T t);
 }

@@ -23,9 +23,15 @@ public class Punting extends AbstractStat<Punting> implements Jsonable{
     private int lng;
     
     public Punting() {
+        pts = 0;
+        yds = 0;
+        avg = 0;
+        i20 = 0;
+        lng = 0;
     }
 
     public Punting(JSONObject json) {
+        this();
         initJson(json);
     }
 

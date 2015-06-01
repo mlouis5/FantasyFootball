@@ -25,9 +25,17 @@ public class Passing extends AbstractStat<Passing> implements Jsonable{
     private int twoptm;
     
     public Passing() {
+        att = 0;
+        cmp = 0;
+        yds = 0;
+        tds = 0;
+        ints = 0;
+        twopta = 0;
+        twoptm = 0;
     }
 
     public Passing(JSONObject json) {
+        this();
         initJson(json);
     }
     

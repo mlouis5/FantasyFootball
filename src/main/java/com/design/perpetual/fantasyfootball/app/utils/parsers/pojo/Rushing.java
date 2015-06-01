@@ -25,9 +25,17 @@ public class Rushing extends AbstractStat<Rushing> implements Jsonable{
     private int twoptm;
 
     public Rushing() {
+        att = 0;
+        yds = 0;
+        tds = 0;
+        lng = 0;
+        lngtd = 0;
+        twopta = 0;
+        twoptm = 0;
     }
 
     public Rushing(JSONObject json) {
+        this();
         initJson(json);
     }
     

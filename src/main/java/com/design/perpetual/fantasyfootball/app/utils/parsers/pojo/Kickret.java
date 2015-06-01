@@ -23,9 +23,15 @@ public class Kickret extends AbstractStat<Kickret> implements Jsonable{
     private int lngtd;
     
     public Kickret() {
+        ret = 0;
+        avg = 0;
+        tds = 0;
+        lng = 0;
+        lngtd = 0;
     }
 
     public Kickret(JSONObject json) {
+        this();
         initJson(json);
     }
 

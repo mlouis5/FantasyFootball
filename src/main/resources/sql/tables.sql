@@ -75,14 +75,22 @@ $preference_validation$ language plpgsql;
 create trigger preference_validation before insert or update on fantasy.preference for each row execute procedure preference_validation();
 		
 drop table if exists fantasy.player;
-create table if not exists fantasy.player (
-	player_id integer primary key,
-	player_name varchar(128) not null,
-	player_team varchar(3),
-	player_position varchar(7) not null,
-	player_number integer default null,
-	retrieval_year integer not null
-) without oids;
+CREATE TABLE fantasy.player (
+	player_id VARCHAR(20) NOT NULL, 
+	active VARCHAR(1), 
+	college VARCHAR(45), 
+	display_name VARCHAR(144) NOT NULL, 
+	dob VARCHAR(10), 
+	fname VARCHAR(77) NOT NULL, 
+	height VARCHAR(5), 
+	jersey VARCHAR(3), 
+	lname VARCHAR(77) NOT NULL, 
+	position VARCHAR(3) NOT NULL, 
+	retrieval_year INTEGER NOT NULL, 
+	team VARCHAR(3) NOT NULL, 
+	weight VARCHAR(3), 
+	PRIMARY KEY (player_id)
+);
 alter table if exists fantasy.player owner to postgres;
 
 create table if not exists fantasy.qb_stats (

@@ -25,9 +25,17 @@ public class Receiving extends AbstractStat<Receiving> implements Jsonable{
     private int twoptm;
     
     public Receiving() {
+        rec = 0;
+        yds = 0;
+        tds = 0;
+        lng = 0;
+        lngtd = 0;
+        twopta = 0;
+        twoptm = 0;
     }
 
     public Receiving(JSONObject json) {
+        this();
         initJson(json);
     }
 

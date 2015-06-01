@@ -8,6 +8,8 @@ package com.design.perpetual.fantasyfootball.app.utils.parsers;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.lang.reflect.Field;
 import java.util.Objects;
+import org.apache.commons.lang3.ArrayUtils;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -22,24 +24,28 @@ public interface Jsonable {
         }
 
         Field[] fields = getClass().getDeclaredFields();
-        for (Field f : fields) {
-            f.setAccessible(true);
-            try {
-                JsonProperty jp = f.getAnnotation(JsonProperty.class);
-                String fieldName;
-                if (Objects.nonNull(jp)) {
-                    fieldName = jp.value();
-                } else {
-                    fieldName = f.getName();
+        Field[] inheritedFields = getClass().getSuperclass().getDeclaredFields();
+
+        Field[] allFields = ArrayUtils.addAll(fields, inheritedFields);
+        for (Field f : allFields) {
+            if (Objects.nonNull(f)) {
+                f.setAccessible(true);
+                try {
+                    JsonProperty jp = f.getAnnotation(JsonProperty.class);
+                    String fieldName;
+                    if (Objects.nonNull(jp)) {
+                        fieldName = jp.value();
+                    } else {
+                        fieldName = f.getName();
+                    }
+                    Object jsonValue = json.get(fieldName);
+                    System.out.println(jsonValue);
+                    f.set(this, jsonValue);
+                } catch (JSONException | IllegalArgumentException | IllegalAccessException ex) {
+
                 }
-
-                Object jsonValue = json.get(fieldName);
-
-                f.set(this, jsonValue);
-            } catch (Exception ex) {
-
+                f.setAccessible(false);
             }
-            f.setAccessible(false);
         }
     }
 }

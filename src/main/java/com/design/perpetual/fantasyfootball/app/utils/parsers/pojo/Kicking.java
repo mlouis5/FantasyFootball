@@ -27,9 +27,19 @@ public class Kicking extends AbstractStat<Kicking> implements Jsonable{
     private int xptot;
 
     public Kicking() {
+        fgm = 0;
+        fga = 0;
+        fgyds = 0;
+        totpfg = 0;
+        xpmade = 0;
+        xpmissed = 0;
+        xpa = 0;
+        xpb = 0;
+        xptot = 0;
     }
 
     public Kicking(JSONObject json) {
+        this();
         initJson(json);
     }
     

@@ -8,7 +8,6 @@ package com.design.perpetual.fantasyfootball.app.utils.parsers.pojo;
 import com.design.perpetual.fantasyfootball.app.utils.parsers.AbstractStat;
 import com.design.perpetual.fantasyfootball.app.utils.parsers.Jsonable;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.lang.reflect.Field;
 import java.util.Objects;
 import org.json.JSONObject;
 
@@ -26,9 +25,15 @@ public class Defense extends AbstractStat<Defense> implements Jsonable {
     private int ffum;
 
     public Defense() {
+        tkl = 0;
+        ast = 0;
+        sk = 0;
+        intc = 0;
+        ffum = 0;
     }
 
     public Defense(JSONObject json) {
+        this();
         initJson(json);
     }
 

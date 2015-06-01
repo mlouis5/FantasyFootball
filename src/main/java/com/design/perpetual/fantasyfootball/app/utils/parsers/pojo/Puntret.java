@@ -23,9 +23,15 @@ public class Puntret extends AbstractStat<Puntret> implements Jsonable{
     private int lngtd;
     
     public Puntret() {
+        ret = 0;
+        avg = 0;
+        tds = 0;
+        lng = 0;
+        lngtd = 0;
     }
 
     public Puntret(JSONObject json) {
+        this();
         initJson(json);
     }
 

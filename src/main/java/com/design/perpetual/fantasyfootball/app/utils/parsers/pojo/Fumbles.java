@@ -23,9 +23,15 @@ public class Fumbles extends AbstractStat<Fumbles> implements Jsonable {
     private int lost;
     
     public Fumbles() {
+        tot = 0;
+        rcv = 0;
+        trcv = 0;
+        yds = 0;
+        lost = 0;
     }
 
     public Fumbles(JSONObject json) {
+        this();
         initJson(json);
     }
 
